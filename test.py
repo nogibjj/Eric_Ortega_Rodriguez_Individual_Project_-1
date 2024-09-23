@@ -6,7 +6,7 @@ from main import load_data, clean_data, analyze_data
 class TestTitanicFunctions(unittest.TestCase):
     
     def setUp(self):
-        """Sets up the testing environment before each test."""
+        """Set up the testing environment."""
         self.csv_data = StringIO(
             """PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
             1,0,3,"Braund, Mr. Owen Harris",male,22,1,0,A/5 21171,7.25,,S
@@ -17,37 +17,24 @@ class TestTitanicFunctions(unittest.TestCase):
             6,0,3,"Moran, Mr. James",male,,0,0,330877,8.4583,,Q
             """
         )
-        
-        # Create a DataFrame using the sample CSV data
         self.test_df = pd.read_csv(self.csv_data)
     
     def test_load_data(self):
-        """Test if load_data function loads the CSV correctly."""
-        url = "https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv"
-        df = load_data(url)
+        """Test load_data function."""
+        df = load_data("https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv")
         self.assertIsInstance(df, pd.DataFrame)
         self.assertIn('Survived', df.columns)
 
     def test_clean_data(self):
-        """Test if clean_data function cleans the data correctly."""
+        """Test clean_data function."""
         df_cleaned = clean_data(self.test_df.copy())
-        
-        # Check that 'Cabin' is dropped
         self.assertNotIn('Cabin', df_cleaned.columns)
-        
-        # Check that missing 'Age' is filled with median
         self.assertFalse(df_cleaned['Age'].isnull().any())
-        
-        # Check that missing 'Embarked' is filled
         self.assertFalse(df_cleaned['Embarked'].isnull().any())
 
     def test_analyze_data(self):
-        """Test analyze_data doesn't raise any exceptions."""
-        # This function prints outputs, so we will just check that it runs without errors
-        try:
-            analyze_data(self.test_df)
-        except Exception as e:
-            self.fail(f"analyze_data raised an exception: {e}")
+        """Test analyze_data doesn't raise exceptions."""
+        self.assertIsNone(analyze_data(self.test_df))
 
 if __name__ == '__main__':
     unittest.main()
