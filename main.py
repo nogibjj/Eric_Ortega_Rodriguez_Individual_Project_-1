@@ -33,9 +33,9 @@ def plot_survival_rates(survival_rates, title):
     plt.xticks(rotation=0)
     plt.ylim(0, 1)
     plt.show()
-    
+
 def calculate_descriptive_statistics(df):
-    """Calculate and return descriptive statistics of the DataFrame."""
+    #Calculate and return descriptive statistics
     return df[['Survived', 'Age', 'Pclass']].describe()
 
 def main():

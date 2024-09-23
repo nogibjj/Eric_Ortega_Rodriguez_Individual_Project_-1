@@ -1,6 +1,7 @@
 # My Titanic Project 
 # IDS 706: Individual Project 1
 ![image](titanic.jpeg)
+![image](titanic_ticket.webp)
 
 ## IDS 706: Individual Project 1
 ## Continous Integration using Github Actions of Python Data Science Project
@@ -51,11 +52,16 @@ calculator.py contains the following functions:
 2. ```survival_rates_by_group``` -- calculates survival rates grouped by column
 3. ```plot_correlation_matrix``` -- plots the correlation matrix 
 4. ```glot_survival_rates``` -- plots survival rates
+5. ```calculate_descriptive_statistics``` -- calculates and return descriptive statistics
 
 ## Data Visualizations
 The code provides insights into how various factors (like gender, age, and passenger class) affected survival rates on the Titanic. By visualizing these relationships, it helps the reader understand the demographic influences on survival during the disaster.
-
+## Descriptive Stats
+![image](stats.png)
+## Correlation Matrix
 ![image](correlation-matrix.png)
+## Survival by Class
 ![image](survival_by_class.png)
+## Survival by Sex
 ![image](survival_by_sex.png)
 
