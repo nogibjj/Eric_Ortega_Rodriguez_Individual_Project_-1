@@ -47,7 +47,7 @@ The data used can be found here:
 https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv
 
 ## Functions
-calculator.py contains the following functions: 
+
 1. ```calculate_correlation_matrix``` -- creates correlation matrix
 2. ```survival_rates_by_group``` -- calculates survival rates grouped by column
 3. ```plot_correlation_matrix``` -- plots the correlation matrix 
@@ -56,7 +56,7 @@ calculator.py contains the following functions:
 
 ## Data Visualizations
 The code provides insights into how various factors (like gender, age, and passenger class) affected survival rates on the Titanic. By visualizing these relationships, it helps the reader understand the demographic influences on survival during the disaster.
-## Descriptive Stats
+## Descriptive Statistics
 ![image](stats.png)
 ## Correlation Matrix
 ![image](correlation-matrix.png)
