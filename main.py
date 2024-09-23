@@ -47,10 +47,10 @@ def main():
     plot_survival_rates(survival_by_sex, 'Survival Rates by Sex')
 
     # Calculate survival rates by age group
-    df['AgeGroup'] = pd.cut(df['Age'], bins=[0, 12, 18, 30, 50, 100], 
-                            labels=['Child', 'Teenager', 'Young Adult', 'Adult', 'Senior'])
-    survival_by_age = survival_rates_by_group(df, 'AgeGroup')
-    plot_survival_rates(survival_by_age, 'Survival Rates by Age Group')
+    age_bins = [0, 12, 18, 30, 50, 100]
+    age_labels = ['Child', 'Teenager', 'Young Adult', 'Adult', 'Senior']
+    df['AgeGroup'] = pd.cut(df['Age'], bins=age_bins, labels=age_labels)
+
 
     # Calculate survival rates by class
     survival_by_class = survival_rates_by_group(df, 'Pclass')

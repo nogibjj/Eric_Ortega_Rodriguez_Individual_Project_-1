@@ -21,7 +21,9 @@ class TestTitanicDataAnalysis(unittest.TestCase):
     def test_survival_rates(self):
         for group_by in ['Sex', 'Pclass']:
             rates = survival_rates_by_group(self.df, group_by)
-            self.assertTrue(rates.index.isin(['male', 'female']).any() or rates.index.isin([1, 2, 3]).any())
+            has_sex = rates.index.isin(['male', 'female']).any()
+            has_class = rates.index.isin([1, 2, 3]).any()
+            self.assertTrue(has_sex or has_class)
             self.assertTrue((rates >= 0).all() and (rates <= 1).all())
 
 if __name__ == "__main__":
