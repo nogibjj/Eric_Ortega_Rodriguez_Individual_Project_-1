@@ -1,29 +1,30 @@
+# Importing libraries 
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 def load_data(url):
-    """Load the Titanic dataset from the provided URL."""
+    # Loading the Titanic dataset from the URL
     return pd.read_csv(url)
 
 def calculate_correlation_matrix(df):
-    """Calculate and return the correlation matrix of the DataFrame."""
+    #Calculating  the correlation matrix of the DataFrame
     numeric_df = df.select_dtypes(include='number')  # Select only numeric columns
     return numeric_df.corr()
 
 def survival_rates_by_group(df, group_by):
-    """Calculate survival rates grouped by a specific column."""
+    # Calculate survival rates grouped by column
     return df.groupby(group_by)['Survived'].mean()
 
 def plot_correlation_matrix(corr):
-    """Plot the correlation matrix using a heatmap."""
+    #Plot the correlation matrix 
     plt.figure(figsize=(10, 8))
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
     plt.title('Correlation Matrix')
     plt.show()
 
 def plot_survival_rates(survival_rates, title):
-    """Plot survival rates using a bar plot."""
+    #Plot survival rates
     plt.figure(figsize=(8, 5))
     survival_rates.plot(kind='bar', color='skyblue')
     plt.title(title)
