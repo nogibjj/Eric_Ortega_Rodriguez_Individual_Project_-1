@@ -25,6 +25,13 @@ class TestTitanicDataAnalysis(unittest.TestCase):
             has_class = rates.index.isin([1, 2, 3]).any()
             self.assertTrue(has_sex or has_class)
             self.assertTrue((rates >= 0).all() and (rates <= 1).all())
+            
+    def test_descriptive_statistics(self):
+        stats = calculate_descriptive_statistics(self.df)
+        self.assertIsInstance(stats, pd.DataFrame)
+        self.assertTrue({'Survived', 'Age', 'Pclass'}.issubset(stats.columns))
+        self.assertEqual(stats.shape[0], 8)  # Default describe() returns 8 statistics
+
 
 if __name__ == "__main__":
     unittest.main()

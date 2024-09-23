@@ -1,4 +1,5 @@
-# My Titanic Project IDS 706: Individual Project 1
+# My Titanic Project 
+# IDS 706: Individual Project 1
 ![image](titanic.jpeg)
 
 ## IDS 706: Individual Project 1
@@ -44,7 +45,8 @@ calculator.py contains the following functions:
 4. ```glot_survival_rates``` -- plots survival rates
 
 ## Data Visualizations
-Histogram of final exam scores and scatter plot of hours studied vs final exam score generated from ```generate_visualization(col, col2)``` in ```main.py```
+The code provides insights into how various factors (like gender, age, and passenger class) affected survival rates on the Titanic. By visualizing these relationships, it helps the reader understand the demographic influences on survival during the disaster.
+
 ![image](correlation-matrix.png)
 ![image](survival_by_class.png)
 ![image](survival_by_sex.png)

@@ -33,11 +33,20 @@ def plot_survival_rates(survival_rates, title):
     plt.xticks(rotation=0)
     plt.ylim(0, 1)
     plt.show()
+    
+def calculate_descriptive_statistics(df):
+    """Calculate and return descriptive statistics of the DataFrame."""
+    return df[['Survived', 'Age', 'Pclass']].describe()
 
 def main():
     # Load the dataset
     url = "https://github.com/datasciencedojo/datasets/raw/master/titanic.csv"
     df = load_data(url)
+
+    # Calculate and print descriptive statistics
+    descriptive_stats = calculate_descriptive_statistics(df)
+    print("Descriptive Statistics:")
+    print(descriptive_stats)
 
     # Calculate and plot the correlation matrix
     corr = calculate_correlation_matrix(df)
@@ -56,6 +65,10 @@ def main():
     # Calculate survival rates by class
     survival_by_class = survival_rates_by_group(df, 'Pclass')
     plot_survival_rates(survival_by_class, 'Survival Rates by Class Level')
+
+        # Calculate and print descriptive statistics
+    descriptive_stats = calculate_descriptive_statistics(df)
+    print(descriptive_stats)
 
 if __name__ == "__main__":
     main()
