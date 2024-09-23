@@ -1,18 +1,30 @@
 
 [![CI](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_2/actions/workflows/hello.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Mini_Project_2/actions/workflows/hello.yml)
 
-# Eric Ortega Rodriguez's Pandas Descriptive Statistics Script
+# Eric Ortega Rodriguez's Individual Project #1
 
-## ☑️ Requirements (Mini Project 2):
-1. Python script using Pandas for descriptive statistics
-2. Read a dataset (CSV or Excel)
-3. Generate summary statistics (mean, median, standard deviation)
-4. Create at least one data visualization
+## ☑️ Requirements (Individual Project #1):
+* ***Jupyter Notebook*** with:
+    - Cells that perform descriptive statistics using Polars or Panda.
+    - Tested by using nbval plugin for pytest
+* ***Makefile*** with the following:
+    - Run all tests (must test notebook and script and lib)
+    - Formats code with `Python black` Links to an external site.
+    - Lints code with `Ruff` Links to an external site.
+    - Installs code via: pip install -r requirements.txt
+* ***main.py*** to run functions 
+* ***test_main.py*** to test script
+* ***requirements.txt***
+* Gitlab Actions performs all four Makefile commands with badges for each one in the README.md
+
 
 ## ☑️ Deliverables:
-1. Python script 
-2. CI/CD with badge
-3. Generated summary report (PDF or markdown) via CI/CD for extra credit or make your own PDF or MD file and push it 
+1. Cells that perform descriptive statistics using Polars or Panda.
+2. Tested by using nbval plugin for pytest
+3. Run all tests (must test notebook and script and lib)
+4. Formats code with Python black
+5. Lints code with Ruff
+6. Installs code via:  pip install -r requirements.txt
 
 ## ☑️ The Data Being Used
 The data being utilized is coming from a GitHub database which can be found [here](https://raw.githubusercontent.com/fivethirtyeight/data/master/drug-use-by-age/drug-use-by-age.csv) 
