@@ -1,65 +1,60 @@
-"""
-        library file 
-"""
-
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
-
-
+import matplotlib.pyplot as plt
 
 def load_data(url):
-    """
-    Loads the Titanic dataset from a given URL and returns a pandas DataFrame.
-    """
+    """Load the Titanic dataset from the provided URL."""
     return pd.read_csv(url)
 
-def clean_data(df):
-    """
-    Cleans the Titanic dataset by handling missing values.
-    """
-    # Fill missing 'Age' with the median value
-    df['Age'].fillna(df['Age'].median(), inplace=True)
-    
-    # Fill missing 'Embarked' with the most frequent value
-    df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
-    
-    # Drop 'Cabin' column due to too many missing values
-    df.drop('Cabin', axis=1, inplace=True)
-    
-    return df
+def calculate_correlation_matrix(df):
+    """Calculate and return the correlation matrix of the DataFrame."""
+    numeric_df = df.select_dtypes(include='number')  # Select only numeric columns
+    return numeric_df.corr()
 
-def analyze_data(df):
-    """
-    Analyzes the Titanic dataset and prints basic statistics and insights.
-    """
-    # Print basic information
-    print("Dataset Info:")
-    print(df.info())
-    print("\nBasic Statistics:")
-    print(df.describe())
-    
-    # Example analysis: survival rate by gender
-    survival_by_gender = df.groupby('Sex')['Survived'].mean()
-    print("\nSurvival Rate by Gender:")
-    print(survival_by_gender)
-    
-    # Example analysis: survival rate by class
-    survival_by_class = df.groupby('Pclass')['Survived'].mean()
-    print("\nSurvival Rate by Passenger Class:")
-    print(survival_by_class)
+def survival_rates_by_group(df, group_by):
+    """Calculate survival rates grouped by a specific column."""
+    return df.groupby(group_by)['Survived'].mean()
+
+def plot_correlation_matrix(corr):
+    """Plot the correlation matrix using a heatmap."""
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Matrix')
+    plt.show()
+
+def plot_survival_rates(survival_rates, title):
+    """Plot survival rates using a bar plot."""
+    plt.figure(figsize=(8, 5))
+    survival_rates.plot(kind='bar', color='skyblue')
+    plt.title(title)
+    plt.xlabel('Group')
+    plt.ylabel('Survival Rate')
+    plt.xticks(rotation=0)
+    plt.ylim(0, 1)
+    plt.show()
 
 def main():
-    url = 'https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv'
-    
-    # Load data
+    # Load the dataset
+    url = "https://github.com/datasciencedojo/datasets/raw/master/titanic.csv"
     df = load_data(url)
-    
-    # Clean data
-    df = clean_data(df)
-    
-    # Analyze data
-    analyze_data(df)
+
+    # Calculate and plot the correlation matrix
+    corr = calculate_correlation_matrix(df)
+    plot_correlation_matrix(corr)
+
+    # Calculate survival rates by sex
+    survival_by_sex = survival_rates_by_group(df, 'Sex')
+    plot_survival_rates(survival_by_sex, 'Survival Rates by Sex')
+
+    # Calculate survival rates by age group
+    df['AgeGroup'] = pd.cut(df['Age'], bins=[0, 12, 18, 30, 50, 100], 
+                            labels=['Child', 'Teenager', 'Young Adult', 'Adult', 'Senior'])
+    survival_by_age = survival_rates_by_group(df, 'AgeGroup')
+    plot_survival_rates(survival_by_age, 'Survival Rates by Age Group')
+
+    # Calculate survival rates by class
+    survival_by_class = survival_rates_by_group(df, 'Pclass')
+    plot_survival_rates(survival_by_class, 'Survival Rates by Class Level')
 
 if __name__ == "__main__":
     main()
