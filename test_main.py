@@ -1,6 +1,11 @@
 import unittest
 import pandas as pd
-from main import load_data, calculate_correlation_matrix, survival_rates_by_group
+from main import (
+    load_data,
+    calculate_correlation_matrix,
+    survival_rates_by_group,
+    calculate_descriptive_statistics
+)
 
 class TestTitanicDataAnalysis(unittest.TestCase):
 
@@ -25,7 +30,7 @@ class TestTitanicDataAnalysis(unittest.TestCase):
             has_class = rates.index.isin([1, 2, 3]).any()
             self.assertTrue(has_sex or has_class)
             self.assertTrue((rates >= 0).all() and (rates <= 1).all())
-            
+
     def test_descriptive_statistics(self):
         stats = calculate_descriptive_statistics(self.df)
         self.assertIsInstance(stats, pd.DataFrame)
