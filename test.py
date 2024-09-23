@@ -1,34 +1,54 @@
-from main import load_dataset, grab_mean, grab_median, grab_std, grab_max
+import unittest
+import pandas as pd
+from io import StringIO
+from main import load_data, clean_data, analyze_data
 
-dataset = "https://raw.githubusercontent.com/fivethirtyeight/data/master/drug-use-by-age/drug-use-by-age.csv"
+class TestTitanicFunctions(unittest.TestCase):
+    
+    def setUp(self):
+        """
+        Sets up the testing environment before each test.
+        You can use StringIO to simulate a CSV file.
+        """
+        self.csv_data = StringIO("""PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
+                                   1,0,3,"Braund, Mr. Owen Harris",male,22,1,0,A/5 21171,7.25,,S
+                                   2,1,1,"Cumings, Mrs. John Bradley (Florence Briggs Thayer)",female,38,1,0,PC 17599,71.2833,C85,C
+                                   3,1,3,"Heikkinen, Miss. Laina",female,26,0,0,STON/O2. 3101282,7.925,,S
+                                   4,1,1,"Futrelle, Mrs. Jacques Heath (Lily May Peel)",female,35,1,0,113803,53.1,C123,S
+                                   5,0,3,"Allen, Mr. William Henry",male,35,0,0,373450,8.05,,S
+                                   6,0,3,"Moran, Mr. James",male,,0,0,330877,8.4583,,Q
+                                   """)
+        
+        # Create a DataFrame using the sample CSV data
+        self.test_df = pd.read_csv(self.csv_data)
+    
+    def test_load_data(self):
+        """Test if load_data function loads the CSV correctly."""
+        url = "https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv"
+        df = load_data(url)
+        self.assertIsInstance(df, pd.DataFrame)
+        self.assertIn('Survived', df.columns)
 
-df1 = load_dataset()
+    def test_clean_data(self):
+        """Test if clean_data function cleans the data correctly."""
+        df_cleaned = clean_data(self.test_df.copy())
+        
+        # Check that 'Cabin' is dropped
+        self.assertNotIn('Cabin', df_cleaned.columns)
+        
+        # Check that missing 'Age' is filled with median
+        self.assertFalse(df_cleaned['Age'].isnull().any())
+        
+        # Check that missing 'Embarked' is filled
+        self.assertFalse(df_cleaned['Embarked'].isnull().any())
 
+    def test_analyze_data(self):
+        """Test analyze_data doesn't raise any exceptions."""
+        # This function prints outputs, so we will just check that it runs without errors
+        try:
+            analyze_data(self.test_df)
+        except Exception as e:
+            self.fail(f"analyze_data raised an exception {e}")
 
-def test_load_dataset():
-    assert len(df1) == 17
-
-
-def test_grab_mean():
-    assert grab_mean(df1, "alcohol_use") <= 56
-
-
-def test_grab_median():
-    assert grab_median(df1, "alcohol_use") <= 65
-
-
-def test_grab_std():
-    assert grab_std(df1, "alcohol_use") <= 27
-
-
-def test_grab_max():
-    assert grab_max(df1, "alcohol_use") <= 85
-    assert grab_max(df1, "alcohol_use") > 80
-
-
-if __name__ == "__main__":
-    test_load_dataset()
-    test_grab_mean()
-    test_grab_median()
-    test_grab_std()
-    test_grab_max()
+if __name__ == '__main__':
+    unittest.main()

@@ -4,45 +4,62 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
-dataset = (
-    "https://raw.githubusercontent.com/fivethirtyeight/data/master/drug-use-by-age/drug-use-by-age.csv"
-)
+def load_data(url):
+    """
+    Loads the Titanic dataset from a given URL and returns a pandas DataFrame.
+    """
+    return pd.read_csv(url)
 
-
-def load_dataset():
-    df = pd.read_csv(dataset)
+def clean_data(df):
+    """
+    Cleans the Titanic dataset by handling missing values.
+    """
+    # Fill missing 'Age' with the median value
+    df['Age'].fillna(df['Age'].median(), inplace=True)
+    
+    # Fill missing 'Embarked' with the most frequent value
+    df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
+    
+    # Drop 'Cabin' column due to too many missing values
+    df.drop('Cabin', axis=1, inplace=True)
+    
     return df
 
-def grab_mean(df, col):
-    return df[col].mean()
+def analyze_data(df):
+    """
+    Analyzes the Titanic dataset and prints basic statistics and insights.
+    """
+    # Print basic information
+    print("Dataset Info:")
+    print(df.info())
+    print("\nBasic Statistics:")
+    print(df.describe())
+    
+    # Example analysis: survival rate by gender
+    survival_by_gender = df.groupby('Sex')['Survived'].mean()
+    print("\nSurvival Rate by Gender:")
+    print(survival_by_gender)
+    
+    # Example analysis: survival rate by class
+    survival_by_class = df.groupby('Pclass')['Survived'].mean()
+    print("\nSurvival Rate by Passenger Class:")
+    print(survival_by_class)
 
-def grab_median(df,col):
-    return df[col].median() 
+def main():
+    url = 'https://raw.githubusercontent.com/datasciencedojo/datasets/refs/heads/master/titanic.csv'
+    
+    # Load data
+    df = load_data(url)
+    
+    # Clean data
+    df = clean_data(df)
+    
+    # Analyze data
+    analyze_data(df)
 
-# def grab STD
-def grab_std(df,col):
-    return df[col].std()
-
-# def grab max
-def grab_max(df,col):
-    return df[col].max()
-
-def create_histogram(df , col):
-    df[col].plot.hist(bins=10, edgecolor ='black')
-    plt.title(col)
-
-df1 = load_dataset()
-df1.head()
-
-mean_alc = grab_mean(df1,"alcohol_use")
-
-median_alc = grab_median(df1,"alcohol_use")
-
-std_alc = grab_std(df1,"alcohol_use")
-
-max_alc = grab_max(df1,"alcohol_use")
-
-create_histogram(df1, "alcohol_use")
+if __name__ == "__main__":
+    main()
