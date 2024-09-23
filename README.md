@@ -8,6 +8,14 @@
 
 The purpose of this assignment was to create a a python script that utilizes pandas to generate summary statistics.
 
+[![Format](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/format.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/format.yml)
+
+[![Install](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/install.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/install.yml)
+
+[![Lint](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/lint.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/lint.yml)
+
+[![Test](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/Eric_Ortega_Rodriguez_Individual_Project_-1/actions/workflows/test.yml)
+
 
 ## YouTube Video
 [Click Here For Demo]()
